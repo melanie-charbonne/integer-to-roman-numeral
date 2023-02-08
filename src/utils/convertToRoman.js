@@ -1,5 +1,5 @@
 function convertToRoman(int) {
-    const romanNumeralMap = {
+    const ROMAN_NUMERAL_MAP = {
         M: 1000,
         CM: 900,
         D: 500,
@@ -17,8 +17,8 @@ function convertToRoman(int) {
     }
     let romanOutput = ''
 
-    for (const key in romanNumeralMap) {
-        const numberValue = romanNumeralMap[key]
+    for (const key in ROMAN_NUMERAL_MAP) {
+        const numberValue = ROMAN_NUMERAL_MAP[key]
         while (numberValue <= int) {
             romanOutput += key
             int -= numberValue

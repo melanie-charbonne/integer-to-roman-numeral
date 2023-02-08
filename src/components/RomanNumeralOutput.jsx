@@ -1,4 +1,4 @@
-const RomanNumeralOutput = ({outputRomanValue}) => {
-    return <p data-testid="output-roman">{outputRomanValue}</p>
+const RomanNumeralOutput = ({romanValue}) => {
+    return <p data-testid="output-roman">{romanValue}</p>
 }
 export default RomanNumeralOutput
