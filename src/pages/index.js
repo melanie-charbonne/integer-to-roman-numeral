@@ -1,16 +1,16 @@
 import { useState } from 'react'
 import Head from 'next/head'
-import { Inter } from '@next/font/google'
 import styles from '@/styles/Home.module.css'
 import IntegerInput from '@/components/IntegerInput'
-
-const inter = Inter({ subsets: ['latin'] })
+import RomanNumeralOutput from '@/components/RomanNumeralOutput'
+import convertToRoman  from '@/utils/convertToRoman';
 
 export default function Home() {
     const minIntegerNumber = 1
     const maxIntegerNumber = 1000 
 
     const [value, setValue] = useState('')
+    const [outputRomanValue, setOutputRomanValue] = useState('')
     
     const handleChange = (e) => {
         let value = e.target.value
@@ -22,7 +22,7 @@ export default function Home() {
         } else {
             setValue('')
         }
-       
+        setOutputRomanValue(convertToRoman(value))    
     }
     return (
         <>
@@ -40,6 +40,7 @@ export default function Home() {
             </Head>
             <main className={styles.main}>
                 <IntegerInput value={value} handleChange={handleChange} />
+                <RomanNumeralOutput outputRomanValue={outputRomanValue} />
             </main>
         </>
     )
