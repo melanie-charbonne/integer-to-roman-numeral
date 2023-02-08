@@ -5,7 +5,7 @@ import IntegerInput from '@/components/IntegerInput'
 import RomanNumeralOutput from '@/components/RomanNumeralOutput'
 import convertToRoman  from '@/utils/convertToRoman';
 
-export default function Home() {
+export default function IntegerToRomanNumeralConverter() {
     const minIntegerNumber = 1
     const maxIntegerNumber = 1000 
 
@@ -22,7 +22,8 @@ export default function Home() {
         } else {
             setValue('')
         }
-        setOutputRomanValue(convertToRoman(value))    
+        setOutputRomanValue(convertToRoman(value))  
+        
     }
     return (
         <>
