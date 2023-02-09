@@ -3,28 +3,38 @@ import Head from 'next/head'
 import styles from '@/styles/Home.module.css'
 import IntegerInput from '@/components/IntegerInput'
 import RomanNumeralOutput from '@/components/RomanNumeralOutput'
-import convertToRoman  from '@/utils/convertToRoman';
+import convertToRoman from '@/utils/convertToRoman'
+import ErrorMessage from '@/components/ErrorMessage'
 
 export default function IntegerToRomanNumeralConverter() {
-    const minIntegerNumber = 1
-    const maxIntegerNumber = 1000 
-
     const [value, setValue] = useState('')
-    const [outputRomanValue, setOutputRomanValue] = useState('')
-    
+    const [romanValue, setRomanValue] = useState('')
+    const [isEmptyValue, setIsEmptyValue] = useState(true)
+    const [error, setError] = useState(false)
+
     const handleChange = (e) => {
-        let value = e.target.value
-        if (!isNaN(value)) {
-            value = parseInt(value)
-            if (value > maxIntegerNumber) value = maxIntegerNumber
-            if (value < minIntegerNumber) value = minIntegerNumber
-            setValue(Number(value))
-        } else {
-            setValue('')
+        let userInputValue = e.target.value
+        let parsedUserInputValue = parseInt(userInputValue)
+
+        setValue(userInputValue)
+
+        if (userInputValue == '') {
+            setError(false)
+            setIsEmptyValue(true)
+            return
         }
-        setOutputRomanValue(convertToRoman(value))  
-        
+
+        if (
+            isValidValue(parsedUserInputValue)
+        ) {
+            setRomanValue(convertToRoman(parsedUserInputValue))
+            setError(false)
+            setIsEmptyValue(false)
+        } else {
+            setError(true)
+        }
     }
+
     return (
         <>
             <Head>
@@ -40,9 +50,28 @@ export default function IntegerToRomanNumeralConverter() {
                 <link rel='icon' href='/favicon.ico' />
             </Head>
             <main className={styles.main}>
-                <IntegerInput value={value} handleChange={handleChange} />
-                <RomanNumeralOutput outputRomanValue={outputRomanValue} />
+                <div
+                    className={styles.wrapper}
+                    style={
+                        error 
+                            ? { paddingBottom: 0 }
+                            : {}
+                    }
+                >
+                    <h1> Integer to Roman Numeral Calculator </h1>
+                    <IntegerInput value={value} handleChange={handleChange} />
+                    {!error && !isEmptyValue && (
+                        <RomanNumeralOutput romanValue={romanValue} />
+                    )}
+                    {error && <ErrorMessage />}
+                </div>
             </main>
         </>
     )
+}
+const isValidValue = (value) => {
+    const MIN_INT_NUMBER = 1
+    const MAX_INT_NUMBER = 1000
+
+    return value >= MIN_INT_NUMBER && value <= MAX_INT_NUMBER
 }
