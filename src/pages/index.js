@@ -24,7 +24,10 @@ export default function IntegerToRomanNumeralConverter() {
             return
         }
 
-        if ( Number.isInteger(Number(userInputValue)) && isValidValue(parsedUserInputValue) ) {
+        if (
+            Number.isInteger(Number(userInputValue)) &&
+            isValidValue(parsedUserInputValue)
+        ) {
             setRomanValue(convertToRoman(parsedUserInputValue))
             setError(false)
             setIsEmptyValue(false)
@@ -53,7 +56,10 @@ export default function IntegerToRomanNumeralConverter() {
                     style={error ? { paddingBottom: 0 } : {}}
                 >
                     <h1> Integer to Roman Numeral Calculator </h1>
-                    <IntegerInput value={value} handleChange={handleChange} />
+                    <IntegerInput
+                        value={value}
+                        onChangeHandler={handleChange}
+                    />
                     {!error && !isEmptyValue && (
                         <RomanNumeralOutput romanValue={romanValue} />
                     )}
