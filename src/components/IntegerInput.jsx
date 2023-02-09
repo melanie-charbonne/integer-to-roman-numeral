@@ -1,5 +1,5 @@
 import { useCallback } from 'react'
-const IntegerInput = ({ value, handleChange }) => {
+const IntegerInput = ({ value, onChangeHandler }) => {
     const intInput = useCallback((inputElement) => {
         if (inputElement) {
             inputElement.focus()
@@ -14,7 +14,7 @@ const IntegerInput = ({ value, handleChange }) => {
                     min='1'
                     max='1000'
                     value={value}
-                    onChange={(e) => handleChange(e)}
+                    onChange={(e) => onChangeHandler(e)}
                     ref={intInput}
                     placeholder='Enter a number between 1 and 1000'
                 />
